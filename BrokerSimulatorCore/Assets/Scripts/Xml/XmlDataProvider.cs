@@ -2,11 +2,12 @@
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using Assets.Scripts.Utility;
 
 namespace Assets.Scripts.Xml
 {
     //TODO test this class
-    public class XmlDataProvider : Singleton<XmlDataProvider>, IXmlDataProvider
+    public class XmlDataProvider : IXmlDataProvider
     {
         public string SerializeObject<T>(object obj)
         {

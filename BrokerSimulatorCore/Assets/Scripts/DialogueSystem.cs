@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Assets.Scripts.DialogueSystem.EventArgs;
+using Assets.Scripts.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -37,7 +38,7 @@ namespace Assets.Scripts.DialogueSystem
             });
         }
 
-        public void StartConversation(Collection<Dialogue> dialogueCollection)
+        public void StartConversation(Collection<DialogueNode> dialogueCollection)
         {
 
         }
