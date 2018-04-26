@@ -30,11 +30,11 @@ namespace Assets.Scripts.Xml
         {
             byte[] bytes = XmlHelper.StringToByteArr(xmlString);
 
-            var serializer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("DialogueTree"));
             var memoryStream = new MemoryStream(bytes);
-            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
-           
-            return serializer.Deserialize(memoryStream);
+            object deserializedObject = serializer.Deserialize(memoryStream);
+
+            return deserializedObject;
         }
 
         public void CreateXmlFileOutput(string fileLocation, string fileName, string data)

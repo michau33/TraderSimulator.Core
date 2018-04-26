@@ -1,22 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Assets.Scripts.DialogueSystem.Data
 {
+    [XmlRoot("DialogueTree")]
     public class DialogueTreeData
     {
-        public Data DataInstance;
-        
-        public DialogueTreeData()
-        {
-        }
+        [XmlElement("DialogueNode")] public DialogueNodeData[] DialogueNodes { get; set; }
+        [XmlAttribute("category")] public string DialogueCategory { get; set; }
+        //    public Data DataInstance;
 
-        public struct Data
-        {
-            public int NodeId;
-            public string Title;
-            public string Content;
+        //    public DialogueTreeData()
+        //    {
+        //    }
 
-            public List<DialogueNodeOption> DialogueOptions;      
-        }
+        //    public struct Data
+        //    {
+        //        [XmlElement("DialogueNode")]
+        //        public DialogueNodeData[] DialogueNodes;
+        //    }
+        //}
     }
 }

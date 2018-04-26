@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DialogueNodes>
+<DialogueTree category="ShopKeeper">
 	<DialogueNode>
 		<Id>0</Id>
 		<Title>Sample Dialog</Title>
@@ -15,4 +15,19 @@
 			</DialogueOption>
 		</Options>
 	</DialogueNode>
-</DialogueNodes>
+		<DialogueNode>
+		<Id>1</Id>
+		<Title>Sample Dialog 2</Title>
+		<Content>I'm definately working properly !</Content>
+		<Options>
+			<DialogueOption>
+				<Content>Opcja 1</Content>
+				<Id>1</Id>
+			</DialogueOption>
+			<DialogueOption>
+				<Content>Opcja 2</Content>
+				<Id>2</Id>
+			</DialogueOption>
+		</Options>
+	</DialogueNode>
+</DialogueTree>

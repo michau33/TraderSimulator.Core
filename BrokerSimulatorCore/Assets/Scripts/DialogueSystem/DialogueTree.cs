@@ -5,6 +5,7 @@ namespace Assets.Scripts.DialogueSystem
 {
     public class DialogueTree
     {
+        public string DialogueTreeCategory { get; private set; }
         public List<DialogueNode> DialogueNodes { get; private set; }
 
         #region Constructors

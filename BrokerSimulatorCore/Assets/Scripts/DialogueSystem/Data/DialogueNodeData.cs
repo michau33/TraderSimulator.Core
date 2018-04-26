@@ -1,22 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Assets.Scripts.DialogueSystem.Data
 {
+    [XmlRoot("DialogueNode")]
     public class DialogueNodeData
     {
-        public Data DataInstance;
-
-        public DialogueNodeData()
-        {
-        }
-
-        public struct Data
-        {
-            public int NodeId;
-            public string Title;
-            public string Content;
-
-            public List<DialogueNodeOption> DialogueOptions;      
-        }
+        [XmlElement("Id")] public int Id { get; set; }
+        [XmlElement("Title")] public string Title { get; set; }
+        [XmlElement("Content")] public string Content { get; set; }
     }
 }
