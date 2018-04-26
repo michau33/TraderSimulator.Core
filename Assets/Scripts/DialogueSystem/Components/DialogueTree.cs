@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.DialogueSystem.SerializationData;
 
-namespace Assets.Scripts.DialogueSystem
+namespace Assets.Scripts.DialogueSystem.Components
 {
     public class DialogueTree
     {
@@ -13,6 +14,14 @@ namespace Assets.Scripts.DialogueSystem
         public DialogueTree()
         {
             DialogueNodes = new List<DialogueNode>();
+        }
+
+        public DialogueTree(DialogueTreeData dialogueTreeData)
+            : this()
+        {
+            DialogueTreeCategory = dialogueTreeData.DialogueCategory;
+            DialogueNodes = dialogueTreeData.DialogueNodes
+                .Select(node => new DialogueNode(node)).ToList<DialogueNode>();
         }
 
         #endregion

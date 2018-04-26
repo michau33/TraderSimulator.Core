@@ -8,22 +8,18 @@ namespace Assets.Scripts
 {
     public class GameController : Singleton<GameController>
     {
-        [SerializeField] DialogueTree dialogueTree;
-
-        IXmlDataProvider dataProvider;
+        IXmlDataProvider _dataProvider;
+        DialogueTreesProvider _dialogueTreesProvider;
 
         void Awake()
         {
-            dataProvider = new XmlDataProvider();
+            _dataProvider = new XmlDataProvider();
+            _dialogueTreesProvider = new DialogueTreesProvider(_dataProvider);
         }
 
         public void FetchDialogueOptions()
-        {
-            if (dataProvider == null || dialogueTree != null) 
-                return;
-        
-            DialogueTreesProvider dialoguesTreesProvider = new DialogueTreesProvider(dataProvider);
-            dialogueTree = dialoguesTreesProvider.FetchTreeFromXml("dialogue.xml");
+        {        
+            _dialogueTreesProvider.FetchDialogueTreesData("dialogue.xml");
         }
     }
 }

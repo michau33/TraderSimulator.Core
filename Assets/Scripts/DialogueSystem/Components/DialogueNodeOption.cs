@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.DialogueSystem
+﻿namespace Assets.Scripts.DialogueSystem.Components
 {
     public class DialogueNodeOption
     {

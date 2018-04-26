@@ -1,33 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DialogueTree category="ShopKeeper">
-	<DialogueNode>
-		<Id>0</Id>
-		<Title>Sample Dialog</Title>
-		<Content>I'm probably working properly !</Content>
-		<Options>
-			<DialogueOption>
-				<Content>Opcja 1</Content>
-				<Id>1</Id>
-			</DialogueOption>
-			<DialogueOption>
-				<Content>Opcja 2</Content>
-				<Id>2</Id>
-			</DialogueOption>
-		</Options>
-	</DialogueNode>
-		<DialogueNode>
-		<Id>1</Id>
-		<Title>Sample Dialog 2</Title>
-		<Content>I'm definately working properly !</Content>
-		<Options>
-			<DialogueOption>
-				<Content>Opcja 1</Content>
-				<Id>1</Id>
-			</DialogueOption>
-			<DialogueOption>
-				<Content>Opcja 2</Content>
-				<Id>2</Id>
-			</DialogueOption>
-		</Options>
-	</DialogueNode>
-</DialogueTree>
+<DialogueTrees>
+  <DialogueTree category="shopkeeper_01">
+    <DialogueNode>
+      <Id>0</Id>
+      <Title>Sample Dialog</Title>
+      <Content>I'm probably working properly !</Content>
+      <Options>
+        <DialogueOption>
+          <Content>Opcja 1</Content>
+          <Id>1</Id>
+        </DialogueOption>
+        <DialogueOption>
+          <Content>Opcja 2</Content>
+          <Id>2</Id>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <Id>1</Id>
+      <Title>Sample Dialog 2</Title>
+      <Content>I'm definately working properly !</Content>
+      <Options>
+        <DialogueOption>
+          <Content>Opcja 1</Content>
+          <Id>1</Id>
+        </DialogueOption>
+        <DialogueOption>
+          <Content>Opcja 2</Content>
+          <Id>2</Id>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+  </DialogueTree>
+  <DialogueTree category="broker_01">
+    <DialogueNode>
+      <Id>0</Id>
+      <Title>Sample Dialog</Title>
+      <Content>I'm probably working properly !</Content>
+      <Options>
+        <DialogueOption>
+          <Content>Opcja 1</Content>
+          <Id>1</Id>
+        </DialogueOption>
+        <DialogueOption>
+          <Content>Opcja 2</Content>
+          <Id>2</Id>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <Id>1</Id>
+      <Title>Sample Dialog 2</Title>
+      <Content>I'm definately working properly !</Content>
+      <Options>
+        <DialogueOption>
+          <Content>Opcja 1</Content>
+          <Id>1</Id>
+        </DialogueOption>
+        <DialogueOption>
+          <Content>Opcja 2</Content>
+          <Id>2</Id>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+    <DialogueNode>
+      <Id>1</Id>
+      <Title>Sample Dialog 3</Title>
+      <Content>Oddawaj moje pieniądze i mój miecz !</Content>
+      <Options>
+        <DialogueOption>
+          <Content>Opcja 1</Content>
+          <Id>1</Id>
+        </DialogueOption>
+        <DialogueOption>
+          <Content>Opcja 2</Content>
+          <Id>2</Id>
+        </DialogueOption>
+      </Options>
+    </DialogueNode>
+  </DialogueTree>
+</DialogueTrees>

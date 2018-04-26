@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Assets.Scripts.DialogueSystem.Data
+namespace Assets.Scripts.DialogueSystem.SerializationData
 {
     [XmlRoot("DialogueOption")]
     public class DialogueOptionData

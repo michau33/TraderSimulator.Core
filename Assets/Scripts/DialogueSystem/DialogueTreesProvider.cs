@@ -1,5 +1,8 @@
-﻿using System;
-using Assets.Scripts.DialogueSystem.Data;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
+using Assets.Scripts.DialogueSystem.Components;
+using Assets.Scripts.DialogueSystem.SerializationData;
 using Assets.Scripts.Xml;
 using UnityEngine;
 
@@ -8,39 +11,59 @@ namespace Assets.Scripts.DialogueSystem
     //TODO remember that you are using Application.dataPath temporary. It won't work in production
     public class DialogueTreesProvider
     {
-        private readonly IXmlDataProvider xmlDataProvider;
+        // later file should be moved to static resources or repository
+        const string FileName = "dialogue.xml";
+
+        public List<DialogueTreeData> LoadedDialogueTrees
+        {
+            get;
+            private set;
+        }
+
+        private readonly IXmlDataProvider _xmlDataProvider;
 
         public DialogueTreesProvider(IXmlDataProvider xmlDataProvider)
         {
-            this.xmlDataProvider = xmlDataProvider;
+            _xmlDataProvider = xmlDataProvider;
+
+            LoadedDialogueTrees = new List<DialogueTreeData>();
+        }
+
+        public void FetchDialogueTreesData()
+        {
+            var dialogueTreesData = FetchTreeFromXml(FileName);
+
+            foreach (var dialogueTree in dialogueTreesData.DialogueTrees)
+            {
+                if (LoadedDialogueTrees.Contains(dialogueTree))
+                    return;
+
+                LoadedDialogueTrees.Add(dialogueTree);
+            }
         }
 
         // for now load xml from assets folder to use it in editor window.
-        public DialogueTree FetchTreeFromXml(string fileName)
+        private DialoguesTreesListData FetchTreeFromXml(string fileName)
         {
-            string xmlData = xmlDataProvider.LoadDataFromXml(Application.dataPath, fileName);
-
-            Debug.Log(xmlData);
-
-            var dialogueTreeData = xmlDataProvider.DeserializeObject<DialogueTreeData>(xmlData);
-            DialogueTreeData dialogueTree = ((DialogueTreeData) dialogueTreeData);
-
-            Debug.Log(dialogueTree.DialogueCategory);
-
-            foreach (var dialogueNode in dialogueTree.DialogueNodes)
-            {
-                Debug.Log(dialogueNode.Id + " " + dialogueNode.Title + " " + dialogueNode.Content);
-                
-            }
-
-            
-            return new DialogueTree();
+            return (DialoguesTreesListData)_xmlDataProvider
+                .DeserializeObject<DialoguesTreesListData>(
+                    _xmlDataProvider.LoadDataFromXml(Application.dataPath, fileName));
         }
 
-        public void SaveTreeToXml(DialogueTree tree, string fileName)
+        public DialogueTree FetchTreeByCategory(string dialogueCategory)
         {
-            string dataToWrite = xmlDataProvider.SerializeObject<DialogueNodeData>(tree);
-            xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
+            var wantedTree = LoadedDialogueTrees
+                .Select(dialogueData => new DialogueTree(dialogueData)).First(tree => tree.DialogueTreeCategory == dialogueCategory);
+
+            return wantedTree ?? new DialogueTree();
         }
+
+        // I'll probably add that functionality later
+        //public void SaveTreeToXml(DialogueTree tree, string fileName)
+        //{
+        //    string dataToWrite = xmlDataProvider.SerializeObject<DialogueNodeData>(tree);
+        //    xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
+        //}
     }
+
 }

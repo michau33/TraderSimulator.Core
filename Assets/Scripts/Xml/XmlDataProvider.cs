@@ -30,7 +30,7 @@ namespace Assets.Scripts.Xml
         {
             byte[] bytes = XmlHelper.StringToByteArr(xmlString);
 
-            var serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("DialogueTree"));
+            var serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("DialogueTrees"));
             var memoryStream = new MemoryStream(bytes);
             object deserializedObject = serializer.Deserialize(memoryStream);
 

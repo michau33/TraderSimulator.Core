@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.DialogueSystem.SerializationData;
 
-namespace Assets.Scripts.DialogueSystem
+namespace Assets.Scripts.DialogueSystem.Components
 {
     public class DialogueNode
     {
@@ -34,6 +35,15 @@ namespace Assets.Scripts.DialogueSystem
             : this(id, content, title)
         {
             Options = new List<DialogueNodeOption>(options);
+        }
+
+        //TODO ADD OPTIONS
+        public DialogueNode(DialogueNodeData nodeData)
+        {
+            Id = nodeData.Id;
+            Title = nodeData.Title;
+            Content = nodeData.Content;
+           
         }
 
         #endregion
