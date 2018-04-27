@@ -18,8 +18,8 @@ namespace Assets.Scripts
         }
 
         public void FetchDialogueOptions()
-        {        
-            _dialogueTreesProvider.FetchDialogueTreesData("dialogue.xml");
+        {
+            _dialogueTreesProvider.FetchDialogueTreesData();
         }
     }
 }
