@@ -2,6 +2,7 @@
 
 namespace Assets.Scripts.DialogueSystem.Components
 {
+    // TODO ADD OWN ID AND DESTINATION ID
     public class DialogueOption
     {
         public string Content { get; private set; }

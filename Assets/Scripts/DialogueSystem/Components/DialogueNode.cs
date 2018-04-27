@@ -34,35 +34,18 @@ namespace Assets.Scripts.DialogueSystem.Components
 
         #endregion
 
-        #region Dialogue options management
-
-        public void AddDialogueOption(DialogueOption option)
-        {
-            if (Options.Contains(option))
-                return;
-            
-            Options.Add(option);
-        }
-
-        public void RemoveDialogueOption(DialogueOption option)
-        {
-            if (!Options.Contains(option))
-                return;
-
-            Options.Remove(option);
-        }
-
-        #endregion
-
         public override bool Equals(object obj)
         {
             var node = obj as DialogueNode;
-            return node != null &&
-                   Id == node.Id;
+            return node != null
+                   && Id == node.Id;
         }
+
         public override int GetHashCode()
         {
-            return -1065341352 + Id.GetHashCode();
+            var hashCode = -1492648413;
+            hashCode = hashCode * -1541538291 + EqualityComparer<int>.Default.GetHashCode(Id);
+            return hashCode;
         }
     }
 }

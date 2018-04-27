@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DialogueTrees>
-  <DialogueTree category="shopkeeper_01">
+  <DialogueTree category="shopkeeper_01" id="0">
     <DialogueNode>
       <Id>0</Id>
       <Title>Sample Dialog</Title>
@@ -32,7 +32,7 @@
       </Options>
     </DialogueNode>
   </DialogueTree>
-  <DialogueTree category="broker_01">
+  <DialogueTree category="broker_01" id="1">
     <DialogueNode>
       <Id>0</Id>
       <Title>Sample Dialog</Title>

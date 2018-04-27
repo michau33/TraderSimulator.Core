@@ -11,16 +11,13 @@ namespace Assets.Scripts.DialogueSystem
     //TODO remember that you are using Application.dataPath temporary. It won't work in production
     public class DialogueTreesProvider
     {
-        // later file should be moved to static resources or repository
-        const string FileName = "dialogue.xml";
-        
-        public List<DialogueTreeData> LoadedDialogueTrees
-        {
-            get;
-            private set;
-        }
+        public List<DialogueTreeData> LoadedDialogueTrees { get; private set; }
 
         private readonly IXmlDataProvider _xmlDataProvider;
+
+        // later file should be moved to static resources or repository
+        const string FileName = "dialogue.xml";
+
 
         public DialogueTreesProvider(IXmlDataProvider xmlDataProvider)
         {
