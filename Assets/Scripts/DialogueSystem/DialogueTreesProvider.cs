@@ -13,7 +13,7 @@ namespace Assets.Scripts.DialogueSystem
     {
         // later file should be moved to static resources or repository
         const string FileName = "dialogue.xml";
-
+        
         public List<DialogueTreeData> LoadedDialogueTrees
         {
             get;
@@ -61,8 +61,8 @@ namespace Assets.Scripts.DialogueSystem
         // I'll probably add that functionality later
         //public void SaveTreeToXml(DialogueTree tree, string fileName)
         //{
-        //    string dataToWrite = xmlDataProvider.SerializeObject<DialogueNodeData>(tree);
-        //    xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
+        //    string dataToWrite = _xmlDataProvider.SerializeObject<DialogueNodeData>(tree);
+        //    _xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
         //}
     }
 

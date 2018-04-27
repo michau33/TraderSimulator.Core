@@ -8,5 +8,6 @@ namespace Assets.Scripts.DialogueSystem.SerializationData
         [XmlElement("Id")] public int Id { get; set; }
         [XmlElement("Title")] public string Title { get; set; }
         [XmlElement("Content")] public string Content { get; set; }
+        [XmlElement("DialogueOption")] public DialogueOptionData[] DialogueOptions { get; set; }
     }
 }

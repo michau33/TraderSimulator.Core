@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Assets.Scripts.DialogueSystem.SerializationData;
 
 namespace Assets.Scripts.DialogueSystem.Components
@@ -7,50 +8,35 @@ namespace Assets.Scripts.DialogueSystem.Components
     {
         public int Id = -1;
 
-        public readonly string Title;
-        public readonly string Content;
-        public readonly List<DialogueNodeOption> Options;
+        public string Title { get; private set; }
+        public string Content { get; private set; }
+        public List<DialogueOption> Options { get; private set; }
 
         #region Constructors
 
         public DialogueNode()
         {
-            Options = new List<DialogueNodeOption>();
         }
 
-        public DialogueNode(int id, string content)
-            : this()
+        public DialogueNode(int id, string title, string content, List<DialogueOption> options)
         {
             Id = id;
-            Content = content;
-        }
-
-        public DialogueNode(int id, string content, string title) 
-            : this(id, content)
-        {
             Title = title;
+            Content = content;
+            Options = options;
         }
-
-        public DialogueNode(int id, string content, string title, IEnumerable<DialogueNodeOption> options) 
-            : this(id, content, title)
+        
+        public DialogueNode(DialogueNodeData data)
+            : this(data.Id, data.Title, data.Content, data.DialogueOptions.Select(o => new DialogueOption(o)).ToList())
         {
-            Options = new List<DialogueNodeOption>(options);
-        }
 
-        //TODO ADD OPTIONS
-        public DialogueNode(DialogueNodeData nodeData)
-        {
-            Id = nodeData.Id;
-            Title = nodeData.Title;
-            Content = nodeData.Content;
-           
         }
 
         #endregion
 
         #region Dialogue options management
 
-        public void AddDialogueOption(DialogueNodeOption option)
+        public void AddDialogueOption(DialogueOption option)
         {
             if (Options.Contains(option))
                 return;
@@ -58,7 +44,7 @@ namespace Assets.Scripts.DialogueSystem.Components
             Options.Add(option);
         }
 
-        public void RemoveDialogueOption(DialogueNodeOption option)
+        public void RemoveDialogueOption(DialogueOption option)
         {
             if (!Options.Contains(option))
                 return;
