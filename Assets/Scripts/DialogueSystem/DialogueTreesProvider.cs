@@ -49,7 +49,7 @@ namespace Assets.Scripts.DialogueSystem
 
         public void SaveTreeToXml(DialogueTree tree, string fileName)
         {
-            string dataToWrite = _xmlDataProvider.SerializeObject<DialogueTree>(tree);
+            string dataToWrite = _xmlDataProvider.SerializeObject<DialogueTreeData>(tree);
             _xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
         }
 
