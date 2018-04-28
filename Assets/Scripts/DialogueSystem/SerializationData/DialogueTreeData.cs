@@ -2,11 +2,12 @@
 
 namespace Assets.Scripts.DialogueSystem.SerializationData
 {
-    [XmlRoot("DialogueTree")]
+    [XmlRoot("tree")]
     public class DialogueTreeData
     {
-        [XmlElement("DialogueNode")] public DialogueNodeData[] DialogueNodes { get; set; }
-        [XmlAttribute("Id")] public int DialogueId { get; set; }
+        [XmlAttribute("id")] public int DialogueId { get; set; }
         [XmlAttribute("category")] public string DialogueCategory { get; set; }
+
+        [XmlElement("node")] public DialogueNodeData[] DialogueNodes { get; set; }
     }
 }

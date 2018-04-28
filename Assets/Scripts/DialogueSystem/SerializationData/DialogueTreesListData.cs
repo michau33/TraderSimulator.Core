@@ -2,10 +2,10 @@
 
 namespace Assets.Scripts.DialogueSystem.SerializationData
 {
-    [XmlRoot("DialogueTrees")]
+    [XmlInclude(typeof(DialogueTreeData))]
+    [XmlRoot("trees")]
     public class DialoguesTreesListData
     {
-        [XmlElement("DialogueTree")]
-        public DialogueTreeData[] DialogueTrees;
+        [XmlElement("tree")] public DialogueTreeData[] DialogueTrees;
     }
 }

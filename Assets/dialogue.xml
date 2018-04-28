@@ -1,82 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DialogueTrees>
-  <DialogueTree category="shopkeeper_01" id="0">
-    <DialogueNode>
-      <Id>0</Id>
-      <Title>Sample Dialog</Title>
-      <Content>I'm probably working properly !</Content>
-      <Options>
-        <DialogueOption>
-          <Content>Opcja 1</Content>
-          <Id>1</Id>
-        </DialogueOption>
-        <DialogueOption>
-          <Content>Opcja 2</Content>
-          <Id>2</Id>
-        </DialogueOption>
-      </Options>
-    </DialogueNode>
-    <DialogueNode>
-      <Id>1</Id>
-      <Title>Sample Dialog 2</Title>
-      <Content>I'm definately working properly !</Content>
-      <Options>
-        <DialogueOption>
-          <Content>Opcja 1</Content>
-          <Id>1</Id>
-        </DialogueOption>
-        <DialogueOption>
-          <Content>Opcja 2</Content>
-          <Id>2</Id>
-        </DialogueOption>
-      </Options>
-    </DialogueNode>
-  </DialogueTree>
-  <DialogueTree category="broker_01" id="1">
-    <DialogueNode>
-      <Id>0</Id>
-      <Title>Sample Dialog</Title>
-      <Content>I'm probably working properly !</Content>
-      <Options>
-        <DialogueOption>
-          <Content>Opcja 1</Content>
-          <Id>1</Id>
-        </DialogueOption>
-        <DialogueOption>
-          <Content>Opcja 2</Content>
-          <Id>2</Id>
-        </DialogueOption>
-      </Options>
-    </DialogueNode>
-    <DialogueNode>
-      <Id>1</Id>
-      <Title>Sample Dialog 2</Title>
-      <Content>I'm definately working properly !</Content>
-      <Options>
-        <DialogueOption>
-          <Content>Opcja 1</Content>
-          <Id>1</Id>
-        </DialogueOption>
-        <DialogueOption>
-          <Content>Opcja 2</Content>
-          <Id>2</Id>
-        </DialogueOption>
-      </Options>
-    </DialogueNode>
-    <DialogueNode>
-      <Id>1</Id>
-      <Title>Sample Dialog 3</Title>
-      <Content>Oddawaj moje pieniądze i mój miecz !</Content>
-      <Options>
-        <DialogueOption>
-          <Content>Opcja 1</Content>
-          <Id>1</Id>
-        </DialogueOption>
-        <DialogueOption>
-          <Content>Opcja 2</Content>
-          <Id>2</Id>
-        </DialogueOption>
-      </Options>
-    </DialogueNode>
-  </DialogueTree>
-</DialogueTrees>
+<trees>
+  <tree id="1" category="salesman">
+    <node id="1">
+      <title>Want some weed ?</title>
+      <content>Pssst... I'm a travelling salesman. Want to buy some good stuff ?</content>
+      <responses>
+        <response id="1" desination="2">
+          <content>Tell him that you're interested</content>
+        </response>
+        <response id="2" desination="-1">
+          <content>Ignore him</content>
+        </response>
+      </responses>
+    </node>
+    <node id="2">
+      <title>Want some weed ?</title>
+      <content>So you owe me 20$</content>
+      <responses>
+        <response id="1" desination="-1">
+          <content>Give him 20$</content>
+        </response>
+        <response id="2" desination="-1">
+          <content>Kill him</content>
+        </response>
+      </responses>
+    </node>
+  </tree>
+</trees>

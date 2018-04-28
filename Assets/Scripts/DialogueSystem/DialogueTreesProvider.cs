@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
 using Assets.Scripts.DialogueSystem.Components;
 using Assets.Scripts.DialogueSystem.SerializationData;
 using Assets.Scripts.Xml;
@@ -11,56 +11,88 @@ namespace Assets.Scripts.DialogueSystem
     //TODO remember that you are using Application.dataPath temporary. It won't work in production
     public class DialogueTreesProvider
     {
-        public List<DialogueTreeData> LoadedDialogueTrees { get; private set; }
+        const string FileName = "dialogue.xml"; // later file should be moved to static resources or repository
 
-        private readonly IXmlDataProvider _xmlDataProvider;
-
-        // later file should be moved to static resources or repository
-        const string FileName = "dialogue.xml";
-
+        readonly IXmlDataProvider _xmlDataProvider;
+        readonly List<DialogueTreeData> _dialogueTreesData;
 
         public DialogueTreesProvider(IXmlDataProvider xmlDataProvider)
         {
             _xmlDataProvider = xmlDataProvider;
-
-            LoadedDialogueTrees = new List<DialogueTreeData>();
+            _dialogueTreesData = new List<DialogueTreeData>();
         }
 
         public void FetchDialogueTreesData()
         {
-            var dialogueTreesData = FetchTreeFromXml(FileName);
+            var data = FetchTreeFromXml(FileName);
 
-            foreach (var dialogueTree in dialogueTreesData.DialogueTrees)
+            if (data == null)
+                return;
+
+            foreach (var dialogueTree in data.DialogueTrees)
             {
-                if (LoadedDialogueTrees.Contains(dialogueTree))
+                if (_dialogueTreesData.Contains(dialogueTree))
                     return;
 
-                LoadedDialogueTrees.Add(dialogueTree);
+                _dialogueTreesData.Add(dialogueTree);
             }
+
+            OnDialoguesFetched();
         }
 
-        // for now load xml from assets folder to use it in editor window.
-        private DialoguesTreesListData FetchTreeFromXml(string fileName)
+        DialoguesTreesListData FetchTreeFromXml(string fileName)
         {
             return (DialoguesTreesListData)_xmlDataProvider
                 .DeserializeObject<DialoguesTreesListData>(
                     _xmlDataProvider.LoadDataFromXml(Application.dataPath, fileName));
         }
 
-        public DialogueTree FetchTreeByCategory(string dialogueCategory)
+        public void SaveTreeToXml(DialogueTree tree, string fileName)
         {
-            var wantedTree = LoadedDialogueTrees
+            string dataToWrite = _xmlDataProvider.SerializeObject<DialogueTree>(tree);
+            _xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
+        }
+
+        #region Getters
+
+        public DialogueTree GetTreeById(int id)
+        {
+            var wantedTree = _dialogueTreesData
+                .Select(treeData => new DialogueTree(treeData)).First(tree => tree.Id == id);
+
+            return wantedTree ?? new DialogueTree();
+        }
+
+        public DialogueTree GetTreeByCategory(string dialogueCategory)
+        {
+            var wantedTree = _dialogueTreesData
                 .Select(dialogueData => new DialogueTree(dialogueData)).First(tree => tree.DialogueTreeCategory == dialogueCategory);
 
             return wantedTree ?? new DialogueTree();
         }
 
-        // I'll probably add that functionality later
-        //public void SaveTreeToXml(DialogueTree tree, string fileName)
-        //{
-        //    string dataToWrite = _xmlDataProvider.SerializeObject<DialogueNodeData>(tree);
-        //    _xmlDataProvider.CreateXmlFileOutput(Application.dataPath, fileName, dataToWrite);
-        //}
-    }
+        public DialogueNode GetNodeById(int treeId, int nodeId)
+        {
+            var wantedNode = _dialogueTreesData
+                .Select(treeData => new DialogueTree(treeData))
+                .First(tree => tree.Id == treeId).DialogueNodes
+                .First(node => node.Id == nodeId);
 
+            return wantedNode ?? new DialogueNode();
+        }
+
+        #endregion
+
+        #region Events
+
+        public EventHandler DialoguesTreesFetched;
+
+        protected void OnDialoguesFetched()
+        {
+            if (DialoguesTreesFetched != null)
+                DialoguesTreesFetched.Invoke(this, System.EventArgs.Empty);
+        }
+
+        #endregion
+    }
 }

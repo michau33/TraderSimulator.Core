@@ -15,7 +15,7 @@ namespace Assets.Scripts.Utility
                     }
                 }
 
-                return Instance;
+                return instance;
             }
         }
     }

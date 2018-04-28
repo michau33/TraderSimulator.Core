@@ -1,40 +1,53 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using Assets.Scripts.Utility;
 
 namespace Assets.Scripts.Xml
 {
-    //TODO test this class
     public class XmlDataProvider : IXmlDataProvider
     {
         public string SerializeObject<T>(object obj)
         {
-            string xmlString = null;
+            try
+            {
+                string xmlString = null;
 
-            var memoryStream = new MemoryStream();
-            var serializer = new XmlSerializer(typeof(T));
-            var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
-                
-            serializer.Serialize(xmlTextWriter, obj);
-            memoryStream = xmlTextWriter.BaseStream as MemoryStream;
+                var memoryStream = new MemoryStream();
+                var serializer = new XmlSerializer(typeof(T));
+                var xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8);
 
-            if (memoryStream != null) 
-                xmlString = XmlHelper.ByteArrToString(memoryStream.ToArray());
+                serializer.Serialize(xmlTextWriter, obj);
+                memoryStream = xmlTextWriter.BaseStream as MemoryStream;
 
-            return xmlString;
+                if (memoryStream != null)
+                    xmlString = XmlHelper.ByteArrToString(memoryStream.ToArray());
+
+                return xmlString;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public object DeserializeObject<T>(string xmlString)
         {
-            byte[] bytes = XmlHelper.StringToByteArr(xmlString);
+            try
+            {
+                byte[] bytes = XmlHelper.StringToByteArr(xmlString);
 
-            var serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("DialogueTrees"));
-            var memoryStream = new MemoryStream(bytes);
-            object deserializedObject = serializer.Deserialize(memoryStream);
+                var serializer = new XmlSerializer(typeof(T), new XmlRootAttribute("trees"));
+                var memoryStream = new MemoryStream(bytes);
+                object deserializedObject = serializer.Deserialize(memoryStream);
 
-            return deserializedObject;
+                return deserializedObject;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public void CreateXmlFileOutput(string fileLocation, string fileName, string data)

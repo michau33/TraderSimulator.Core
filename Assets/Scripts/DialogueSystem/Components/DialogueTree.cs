@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Assets.Scripts.DialogueSystem.SerializationData;
 
 namespace Assets.Scripts.DialogueSystem.Components
@@ -9,7 +10,6 @@ namespace Assets.Scripts.DialogueSystem.Components
         public int Id { get; private set; }
         public string DialogueTreeCategory { get; private set; }
         public List<DialogueNode> DialogueNodes { get; private set; }
-
 
         public DialogueTree()
         {
@@ -26,8 +26,9 @@ namespace Assets.Scripts.DialogueSystem.Components
             : this(dialogueTreeData.DialogueId, dialogueTreeData.DialogueCategory, 
                 dialogueTreeData.DialogueNodes.Select(n => new DialogueNode(n)).ToList())
         {
-
         }
+
+        #region Override
 
         public override bool Equals(object obj)
         {
@@ -44,5 +45,17 @@ namespace Assets.Scripts.DialogueSystem.Components
             hashCode = hashCode * -1521134296 + EqualityComparer<int>.Default.GetHashCode(Id);
             return hashCode;
         }
+
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            return builder
+                .AppendFormat(
+                    "DialogueTree ({0} | {1}) \n DialogueNodes ({2})"
+                    , Id, DialogueTreeCategory, DialogueNodes.Count)
+                .ToString();
+        }
+
+        #endregion
     }
 }

@@ -6,33 +6,29 @@ namespace Assets.Scripts.DialogueSystem.Components
 {
     public class DialogueNode
     {
-        public int Id = -1;
-
+        public int Id { get; private set; }
         public string Title { get; private set; }
         public string Content { get; private set; }
-        public List<DialogueOption> Options { get; private set; }
-
-        #region Constructors
+        public List<DialogueResponse> Options { get; private set; }
 
         public DialogueNode()
         {
         }
 
-        public DialogueNode(int id, string title, string content, List<DialogueOption> options)
+        public DialogueNode(int id, string title, string content, List<DialogueResponse> options)
         {
             Id = id;
             Title = title;
             Content = content;
             Options = options;
         }
-        
+
+        #region Override
+
         public DialogueNode(DialogueNodeData data)
-            : this(data.Id, data.Title, data.Content, data.DialogueOptions.Select(o => new DialogueOption(o)).ToList())
+            : this(data.Id, data.Title, data.Content, data.DialogueResponses.Select(o => new DialogueResponse(o)).ToList())
         {
-
         }
-
-        #endregion
 
         public override bool Equals(object obj)
         {
@@ -47,5 +43,7 @@ namespace Assets.Scripts.DialogueSystem.Components
             hashCode = hashCode * -1541538291 + EqualityComparer<int>.Default.GetHashCode(Id);
             return hashCode;
         }
+
+        #endregion
     }
 }
